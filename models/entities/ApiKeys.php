@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace WebDrinkAPI\Models;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,7 +34,6 @@ class ApiKeys
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date = 'CURRENT_TIMESTAMP';
-
 
 
     /**

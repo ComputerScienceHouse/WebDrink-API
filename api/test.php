@@ -1,12 +1,14 @@
 <?php
-$app->get('/api/{api_key}', function (\Slim\Http\Request $request, \Slim\Http\Response $response, $args) {
+
+use WebDrinkAPI\Models\ApiKeys;
+
+$app->get('/api/{api_key}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
     $api_key = $request->getAttribute('api_key');
 
-    $entityManager = \utils\Database::getEntityManager();
+    $entityManager = \WebDrinkAPI\Utils\Database::getEntityManager();
+    $api = new \WebDrinkAPI\Utils\API();
 
-    $api_key = $entityManager->getRepository(\Models\ApiKeys::class)->findOneBy(["api_key" => $api_key]);
+    $api_key = $entityManager->getRepository(ApiKeys::class)->findOneBy(["apiKey" => $api_key]);
 
-    $api = new \utils\API();
-
-    return $response->withJson($api->result(true, "Worked", $api_key));
+    return $response->withJson($api->result(true, "Greetings, " . $api_key->getUid() . "!", true));
 });

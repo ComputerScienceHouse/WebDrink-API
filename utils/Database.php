@@ -1,6 +1,6 @@
 <?php
 
-namespace utils;
+namespace WebDrinkAPI\Utils;
 
 use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;

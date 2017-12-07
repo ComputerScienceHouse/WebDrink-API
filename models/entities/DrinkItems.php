@@ -1,6 +1,6 @@
 <?php
 
-
+namespace WebDrinkAPI\Models;
 
 use Doctrine\ORM\Mapping as ORM;
 

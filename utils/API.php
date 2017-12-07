@@ -1,18 +1,18 @@
 <?php
 
-namespace utils;
+namespace WebDrinkAPI\Utils;
 
 class API
 {
 
     /**
      * Format the result of an API call
-     * @param $status boolean
+     * @param $status bool
      * @param $message string
      * @param $data
      * @return array
      */
-    public function result(boolean $status, string $message, $data)
+    public function result(bool $status, string $message, $data)
     {
         return [
             "status"  => $status,
