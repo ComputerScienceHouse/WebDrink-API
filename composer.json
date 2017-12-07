@@ -1,0 +1,17 @@
+{
+  "name": "ComputerScienceHouse/WebDrink-API",
+  "description": "An API for interacting with CSH WebDrink",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Devin Matte",
+      "email": "matted@csh.rit.edu"
+    }
+  ],
+  "require": {
+    "wisembly/elephant.io": "^2.0.4",
+    "slim/slim": "^3.9",
+    "doctrine/orm": "^2.5"
+  }
+}
