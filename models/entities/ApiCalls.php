@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Models;
 
 use Doctrine\ORM\Mapping as ORM;
 

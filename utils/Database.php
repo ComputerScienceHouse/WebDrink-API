@@ -1,5 +1,7 @@
 <?php
 
+namespace utils;
+
 use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
