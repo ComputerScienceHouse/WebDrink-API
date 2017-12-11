@@ -13,11 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 class ApiCalls
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="call_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $callId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=100, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $username;
 
@@ -25,8 +32,6 @@ class ApiCalls
      * @var string
      *
      * @ORM\Column(name="api_method", type="string", length=255, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $apiMethod;
 
@@ -34,8 +39,6 @@ class ApiCalls
      * @var string
      *
      * @ORM\Column(name="detail", type="string", length=255, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $detail;
 
@@ -43,12 +46,19 @@ class ApiCalls
      * @var \DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $timestamp = 'CURRENT_TIMESTAMP';
 
 
+    /**
+     * Get callId
+     *
+     * @return integer
+     */
+    public function getCallId()
+    {
+        return $this->callId;
+    }
 
     /**
      * Set username

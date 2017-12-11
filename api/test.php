@@ -31,13 +31,22 @@ $app->get('/api/{api_key}', function (\Slim\Http\Request $request, \Slim\Http\Re
     // Grabs api key from the url path
     $api_key = $request->getAttribute('api_key');
 
-    // Creates a entityManager and an API object
+    // Creates a entityManager
     $entityManager = \WebDrinkAPI\Utils\Database::getEntityManager();
-    $api = new \WebDrinkAPI\Utils\API();
 
     // Get the API key object from the DB
-    $api_key = $entityManager->getRepository(ApiKeys::class)->findOneBy(["apiKey" => $api_key]);
+    $apiKey = $entityManager->getRepository(ApiKeys::class)->findOneBy(["apiKey" => $api_key]);
 
-    //TODO: Check for valid key
-    return $response->withJson($api->result(true, "Greetings, " . $api_key->getUid() . "!", true));
+    // API object constructed with username
+    $api = new \WebDrinkAPI\Utils\API($apiKey->getUid());
+
+    if (is_null($apiKey) or empty($apiKey)) {
+        return $response->withJson($api->result(false, "Try again with a valid API key", false));
+    } else if (!is_null($apiKey->getUid()) and !empty($apiKey->getUid())) {
+        //TODO: Remove logging for Tests
+        $api->logAPICall("/test/api", $api_key);
+        return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true));
+    } else {
+        return $response->withJson($api->result(false, "Username not found", false));
+    }
 });

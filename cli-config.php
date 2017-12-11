@@ -1,5 +1,6 @@
 <?php
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use WebDrinkAPI\Utils\Database;
 
 include 'vendor/autoload.php';
 

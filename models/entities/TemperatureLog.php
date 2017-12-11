@@ -15,9 +15,16 @@ class TemperatureLog
     /**
      * @var integer
      *
-     * @ORM\Column(name="machine_id", type="integer", nullable=false)
+     * @ORM\Column(name="log_id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $logId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="machine_id", type="integer", nullable=false)
      */
     private $machineId;
 
@@ -25,8 +32,6 @@ class TemperatureLog
      * @var \DateTime
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $time = 'CURRENT_TIMESTAMP';
 
@@ -34,12 +39,19 @@ class TemperatureLog
      * @var float
      *
      * @ORM\Column(name="temp", type="float", precision=10, scale=0, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $temp;
 
 
+    /**
+     * Get logId
+     *
+     * @return integer
+     */
+    public function getLogId()
+    {
+        return $this->logId;
+    }
 
     /**
      * Set machineId

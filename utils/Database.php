@@ -6,6 +6,8 @@ use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 
+require "config.php";
+
 class Database
 {
     private static $entityManager = null;

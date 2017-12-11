@@ -14,6 +14,7 @@ $app->get('/list', function (\Slim\Http\Request $request, \Slim\Http\Response $r
 
 /**
  * POST /items/add/:name/:price - Add a new drink item (drink admin only)
+ * TODO: Make PUT
  */
 $app->post('/add/{name}/{price}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
     //TODO
@@ -38,6 +39,7 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (\Slim\Http\Req
 
 /**
  * POST /items/delete/:item_id - Delete a drink item (drink admin only)
+ * TODO: Make DELETE
  */
 $app->post('/delete/{item_id}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
     //TODO
