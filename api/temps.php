@@ -23,7 +23,7 @@ $app->get('/machines/{machine_id}/{limit}/{offset}', function (\Slim\Http\Reques
     // Builds values into return JSON
     $values = [];
 
-    foreach ($temps as &$temp){
+    foreach ($temps as &$temp) {
         $values['machine_id'] = $temp->getMachineId();
     }
 

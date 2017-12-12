@@ -5,16 +5,14 @@ namespace WebDrinkAPI\Utils;
 use WebDrinkAPI\Models\ApiCalls;
 use WebDrinkAPI\Utils\Database;
 
-class API
-{
+class API {
     private $user;
 
     /**
      * API constructor.
      * @param string $user
      */
-    public function __construct(string $user = null)
-    {
+    public function __construct(string $user = null) {
         $this->user = $user;
     }
 
@@ -26,8 +24,7 @@ class API
      * @param $data
      * @return array
      */
-    public function result(bool $status, string $message, $data)
-    {
+    public function result(bool $status, string $message, $data) {
         return [
             "status"  => $status,
             "message" => $message,
@@ -41,8 +38,7 @@ class API
      * @param null $detail
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function logAPICall($api_method, $detail = null)
-    {
+    public function logAPICall($api_method, $detail = null) {
         $new_call = new ApiCalls();
         $entityManager = Database::getEntityManager();
 
