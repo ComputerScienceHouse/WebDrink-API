@@ -7,7 +7,11 @@ $autoLoader = require_once 'vendor/autoload.php';
 $app = new \Slim\App();
 
 // Use Config
-require 'config.php';
+if (file_exists("config.php")) {
+    require 'config.php';
+} else {
+    require 'config.temp.php';
+}
 
 // Set up database
 require_once 'utils/Database.php';
@@ -15,8 +19,7 @@ require_once 'utils/Database.php';
 // Set up API
 require_once 'utils/API.php';
 
-foreach (glob("models/entities/*.php") as $filename)
-{
+foreach (glob("models/entities/*.php") as $filename) {
     require_once $filename;
 }
 
