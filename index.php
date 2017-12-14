@@ -1,6 +1,5 @@
 <?php
 
-
 $autoLoader = require_once 'vendor/autoload.php';
 
 // Instantiate the app

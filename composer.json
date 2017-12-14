@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "wisembly/elephant.io": "^2.0.4",
+    "wisembly/elephant.io": "2.0.*",
     "slim/slim": "^3.9",
     "doctrine/orm": "^2.5"
   }
