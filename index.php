@@ -20,7 +20,9 @@ require_once 'utils/Database.php';
 require_once 'utils/API.php';
 
 foreach (glob("models/entities/*.php") as $filename) {
-    require_once $filename;
+    if (isset($filename)) {
+        require_once $filename;
+    }
 }
 
 // Register routes

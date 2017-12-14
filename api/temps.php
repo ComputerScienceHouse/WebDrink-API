@@ -1,21 +1,24 @@
 <?php
 
+use Slim\Http\Request;
+use Slim\Http\Response;
+use WebDrinkAPI\Models\TemperatureLog;
+use WebDrinkAPI\Utils\API;
+use WebDrinkAPI\Utils\Database;
+
 /**
  * GET /temps/machines/:machine_id/:limit/:offset - Get temperature data for a single drink machine
  */
-
-use WebDrinkAPI\Models\TemperatureLog;
-
-$app->get('/machines/{machine_id}/{limit}/{offset}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/machines/{machine_id}/{limit}/{offset}', function (Request $request, Response $response) {
     $machine_id = $request->getAttribute('machine_id');
     $limit = $request->getAttribute('limit');
     $offset = $request->getAttribute('offset');
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     // Creates a entityManager
-    $entityManager = \WebDrinkAPI\Utils\Database::getEntityManager();
+    $entityManager = Database::getEntityManager();
 
     // Gets all logs from DB
     $temps = $entityManager->getRepository(TemperatureLog::class)->findBy(["machineId" => $machine_id], ["time" => "DESC"], $limit, $offset);

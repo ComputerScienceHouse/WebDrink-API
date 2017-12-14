@@ -1,13 +1,17 @@
 <?php
 
+use Slim\Http\Request;
+use Slim\Http\Response;
+use WebDrinkAPI\Utils\API;
+
 /**
  * GET /users/credits/:uid - Get a user's drink credit balance (drink admin only if :uid != your uid)
  */
-$app->get('/credits/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/credits/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -15,11 +19,11 @@ $app->get('/credits/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Re
 /**
  * POST /users/credits/:uid/:value/:type - Update a user's drink credit balance (drink admin only)
  */
-$app->post('/credits/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->post('/credits/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -27,11 +31,11 @@ $app->post('/credits/{uid}', function (\Slim\Http\Request $request, \Slim\Http\R
 /**
  * GET /users/search/:uid - Search for usernames that match the search :uid
  */
-$app->get('/search/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/search/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -39,11 +43,11 @@ $app->get('/search/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Res
 /**
  * GET /users/info/:uid/:ibutton - Get a user's info (uid, username, common name, credit balance, and ibutton value)
  */
-$app->get('/info/{uid}/{ibutton}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/info/{uid}/{ibutton}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -51,11 +55,11 @@ $app->get('/info/{uid}/{ibutton}', function (\Slim\Http\Request $request, \Slim\
 /**
  * GET /users/drops/:limit/:offset/:uid - Get the drop logs for a single or all users
  */
-$app->get('/drops/{limit}/{offset}/{uid}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -63,11 +67,11 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (\Slim\Http\Request $request
 /**
  * GET /users/apikey - Get your API key (Webauth Only)
  */
-$app->get('/apikey', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -75,11 +79,11 @@ $app->get('/apikey', function (\Slim\Http\Request $request, \Slim\Http\Response 
 /**
  * POST /users/apikey - Generate a new API key for yourself (Webauth Only)
  */
-$app->post('/apikey', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->post('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -87,11 +91,11 @@ $app->post('/apikey', function (\Slim\Http\Request $request, \Slim\Http\Response
 /**
  * DELETE /users/apikey - Delete your current API key (Webauth Only)
  */
-$app->delete('/apikey', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->delete('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });

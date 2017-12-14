@@ -1,13 +1,17 @@
 <?php
 
+use Slim\Http\Request;
+use Slim\Http\Response;
+use WebDrinkAPI\Utils\API;
+
 /**
  * GET /drops/status - Check the Websocket connection to the drink server
  */
-$app->get('/status', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->get('/status', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -15,7 +19,7 @@ $app->get('/status', function (\Slim\Http\Request $request, \Slim\Http\Response 
 /**
  * POST /drops/drop/:ibutton/:machine_id/:slot_num/:delay - Drop a drink by machine id and slot number, using the specified delay.
  */
-$app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{}', function (\Slim\Http\Request $request, \Slim\Http\Response $response) {
+$app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{}', function (Request $request, Response $response) {
     $ibutton = $request->getAttribute('ibutton');
     $machine_id = $request->getAttribute('machine_id');
     $slot_num = $request->getAttribute('slot_num');
@@ -24,7 +28,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{}', function (\Slim\Http\Re
     //TODO
 
     // Creates an API object for creating returns
-    $api = new \WebDrinkAPI\Utils\API();
+    $api = new API();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
