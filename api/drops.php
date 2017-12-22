@@ -21,29 +21,33 @@ $app->get('/status/{ibutton}', function (Request $request, Response $response) {
         $elephant = new ElephantIO\Client(DRINK_SERVER_URL, "socket.io", 1, false, true, true);
     }
 
+    // Default output if failure
+    $output = [false, "Unable to get a result from Server (/drops/status)", false];
+
     try {
         $elephant->init();
         $elephant->emit('ibutton', ['ibutton' => $ibutton]);
-        $elephant->on('ibutton_recv', function ($data) use ($api, $response, $elephant) {
+        $elephant->on('ibutton_recv', function ($data) use ($api, $response, $elephant, &$output) {
             $success = explode(":", $data);
             $success = $success[0];
 
             // Checks for a successful response from the websocket
             if ($success === "OK") {
+                $output = [true, "Success! (/drops/status)", true];
                 $elephant->close();
-                return $response->withJson($api->result(true, "Success! (/drops/status)", true));
             } else {
+                $output = [false, "Invalid iButton (/drops/status)", false];
                 $elephant->close();
-                return $response->withJson($api->result(false, "Invalid iButton (/drops/status)", false));
             }
         });
+        // Keep Alive required
+        $elephant->keepAlive();
     } catch (Exception $e) {
-        return $this->_result(false, $e->getMessage() . " (/drops/drop)", false);
+        $output = [false, $e->getMessage() . " (/drops/drop)", false];
     }
 
-    // In case there's a failure
     $elephant->close();
-    return $response->withJson($api->result(false, "Unable to get a result from Server (/drops/status)", false));
+    return $response->withJson($api->result($output[0], $output[1], $output[2]));
 });
 
 /**
@@ -84,10 +88,13 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
         $elephant = new ElephantIO\Client(DRINK_SERVER_URL, "socket.io", 1, false, true, true);
     }
 
+    // Default output if failure
+    $output = [false, "Unable to get a result from Server (/drops/drop)", false];
+
     try {
         $elephant->init();
         $elephant->emit('ibutton', ['ibutton' => $ibutton]);
-        $elephant->on('ibutton_recv', function ($data) use ($machine_alias, $slot_num, $delay, $api, $response, $elephant) {
+        $elephant->on('ibutton_recv', function ($data) use ($machine_alias, $slot_num, $delay, $api, $response, $elephant, &$output) {
             $success = explode(":", $data);
             $success = $success[0];
 
@@ -95,44 +102,43 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
             if ($success === "OK") {
                 // Connect to the drink machine
                 $elephant->emit('machine', ['machine_id' => $machine_alias]);
-                $elephant->on('machine_recv', function ($data) use ($machine_alias, $response, $api, $slot_num, $delay, $elephant) {
+                $elephant->on('machine_recv', function ($data) use ($machine_alias, $response, $api, $slot_num, $delay, $elephant, &$output) {
                     $success = explode(":", $data);
                     $success = $success[0];
 
                     if ($success === "OK") {
                         // Drop the drink
                         $elephant->emit('drop', ['slot_num' => $slot_num, 'delay' => $delay]);
-                        $elephant->on('drop_recv', function ($data) use ($machine_alias, $api, $response, $elephant) {
+                        $elephant->on('drop_recv', function ($data) use ($machine_alias, $api, $response, $elephant, &$output) {
                             $success = explode(":", $data);
                             $success = $success[0];
 
                             if ($success === "OK") {
                                 $api->logAPICall("/drops/drop", $machine_alias);
+                                $output = [true, "Drink dropped!", true];
                                 $elephant->close();
-                                return $response->withJson($api->result(true, "Drink dropped!", true));
                             } else {
                                 $elephant->close();
-                                return $response->withJson($api->result(false, "Error dropping drink: {$data} (/drops/drop)", $data));
+                                $output = [false, "Error dropping drink: {$data} (/drops/drop)", $data];
                             }
                         });
                     } else {
+                        $output = [false, "Error contacting machine: {$data} (/drops/drop)", $data];
                         $elephant->close();
-                        return $response->withJson($api->result(false, "Error contacting machine: {$data} (/drops/drop)", $data));
                     }
                 });
             } else {
+                $output = [false, "Invalid iButton (/drops/status)", false];
                 $elephant->close();
-                return $response->withJson($api->result(false, "Invalid iButton (/drops/status)", false));
             }
             $elephant->keepAlive();
         });
     } catch (Exception $e) {
-        return $response->withJson($api->result(false, $e->getMessage() . " (/drops/drop)", false));
+        $output = [false, $e->getMessage() . " (/drops/drop)", false];
     }
 
-    // In case there's a failure
     $elephant->close();
-    return $response->withJson($api->result(false, "Unable to get a result from Server (/drops/drop)", false));
+    return $response->withJson($api->result($output[0], $output[1], $output[2]));
 });
 
 
