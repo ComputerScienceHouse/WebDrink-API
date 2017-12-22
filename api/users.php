@@ -3,15 +3,18 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use WebDrinkAPI\Utils\API;
+use WebDrinkAPI\Utils\LDAP;
 
 /**
  * GET /users/credits/:uid - Get a user's drink credit balance (drink admin only if :uid != your uid)
  */
 $app->get('/credits/{uid}', function (Request $request, Response $response) {
+    $uid = $request->getAttribute('uid');
     //TODO
 
     // Creates an API object for creating returns
     $api = new API();
+    $ldap = new LDAP();
 
     return $response->withJson($api->result(true, "TODO", true));
 });
