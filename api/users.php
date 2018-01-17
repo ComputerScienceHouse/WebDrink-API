@@ -4,6 +4,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use WebDrinkAPI\Utils\API;
 use WebDrinkAPI\Utils\LDAP;
+use WebDrinkAPI\Utils\OIDC;
 
 /**
  * GET /users/credits/:uid - Get a user's drink credit balance (drink admin only if :uid != your uid)
@@ -68,11 +69,15 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response 
 });
 
 /**
- * GET /users/apikey - Get your API key (Webauth Only)
+ * GET /users/apikey - Get your API key (Auth Only)
  */
 $app->get('/apikey', function (Request $request, Response $response) {
     //TODO
 
+    // Makes route Require Auth
+    $oidc = new OIDC();
+    $oidc->getAuth();
+
     // Creates an API object for creating returns
     $api = new API();
 
@@ -80,11 +85,15 @@ $app->get('/apikey', function (Request $request, Response $response) {
 });
 
 /**
- * POST /users/apikey - Generate a new API key for yourself (Webauth Only)
+ * POST /users/apikey - Generate a new API key for yourself (Auth Only)
  */
 $app->post('/apikey', function (Request $request, Response $response) {
     //TODO
 
+    // Makes route Require Auth
+    $oidc = new OIDC();
+    $oidc->getAuth();
+
     // Creates an API object for creating returns
     $api = new API();
 
@@ -92,10 +101,14 @@ $app->post('/apikey', function (Request $request, Response $response) {
 });
 
 /**
- * DELETE /users/apikey - Delete your current API key (Webauth Only)
+ * DELETE /users/apikey - Delete your current API key (Auth Only)
  */
 $app->delete('/apikey', function (Request $request, Response $response) {
     //TODO
+
+    // Makes route Require Auth
+    $oidc = new OIDC();
+    $oidc->getAuth();
 
     // Creates an API object for creating returns
     $api = new API();

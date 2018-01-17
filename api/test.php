@@ -5,6 +5,7 @@ use Slim\Http\Response;
 use WebDrinkAPI\Models\ApiKeys;
 use WebDrinkAPI\Utils\API;
 use WebDrinkAPI\Utils\Database;
+use WebDrinkAPI\Utils\OIDC;
 
 /**
  * GET /test - Test the API
@@ -17,10 +18,14 @@ $app->get('', function (Request $request, Response $response) {
 });
 
 /**
- * GET /test/webauth - Test the API with Webauth authentication (Webauth only)
+ * GET /test/auth - Test the API with Webauth authentication (Webauth only)
  */
-$app->get('/webauth', function (Request $request, Response $response) {
+$app->get('/auth', function (Request $request, Response $response) {
     //TODO
+
+    // Makes route Require Auth
+    $oidc = new OIDC();
+    $oidc->getAuth();
 
     // Creates an API object for creating returns
     $api = new API();
