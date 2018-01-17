@@ -18,6 +18,9 @@ require_once 'utils/Database.php';
 // Set up API
 require_once 'utils/API.php';
 
+// Set up OIDC
+//require_once 'utils/OIDC.php';
+
 foreach (glob("models/entities/*.php") as $filename) {
     if (isset($filename)) {
         require_once $filename;

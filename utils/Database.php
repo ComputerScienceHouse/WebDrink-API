@@ -21,7 +21,7 @@ class Database {
         'driver'   => DB_DRIVER,
     ];
 
-    public static function getEntityManager() {
+    public static function getEntityManager(): EntityManager {
         if (self::$entityManager === null) {
             $config = Setup::createAnnotationMetadataConfiguration(self::$paths, true, "proxies/", null, false);
             $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS);

@@ -23,6 +23,14 @@ define("DB_HOST", $get_data(getenv("DB_HOST"), 'localhost'));
 define("DB_DRIVER", $get_data(getenv("DB_DRIVER"), 'pdo_mysql'));
 
 /*
+ * *    OpenId configuration
+ * */
+
+define("OIDC_PROVIDER_URL", $get_data(getenv("OIDC_PROVIDER_URL"), 'https://sso.csh.rit.edu/realms/csh'));
+define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), ''));
+define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
+
+/*
  * *	Rate limit delays (one call per X seconds)
  * */
 
