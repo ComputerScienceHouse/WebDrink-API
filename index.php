@@ -23,7 +23,7 @@ require_once 'utils/OIDC.php';
 
 foreach (glob("models/entities/*.php") as $filename) {
     if (isset($filename)) {
-        require_once $filename;
+        require_once @$filename;
     }
 }
 
