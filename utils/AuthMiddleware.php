@@ -1,17 +1,30 @@
 <?php
 
+namespace WebDrinkAPI\Middleware;
+
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Models\ApiKeys;
+use WebDrinkAPI\Utils\Database;
 use WebDrinkAPI\Utils\OIDC;
 
 class AuthMiddleware {
     public function __invoke(Request $request, Response $response, $next) {
-        $parsedBody = $request->getParams();
+        $api_key = $request->getParam('api_key');
 
-        if (isset($parsedBody["api_key"])) {
-            $request = $request->withAttribute('api_key', $parsedBody["api_key"]);
+        if (!is_null($api_key)) {
+            // Creates a entityManager
+            $entityManager = Database::getEntityManager();
 
-            return $next($request, $response);
+            // Get the API key object from the DB
+            $apiKey = $entityManager->getRepository(ApiKeys::class)->findOneBy(["apiKey" => $api_key]);
+
+            if (!is_null($apiKey)) {
+                $request = $request->withAttribute('api_key', $apiKey);
+                return $next($request, $response);
+            } else {
+                return $response->withStatus(401, "Bad Api Key");
+            }
         } else {
             // Makes route Require Auth
             $oidc = new OIDC();

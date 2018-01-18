@@ -16,6 +16,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Middleware\AuthMiddleware;
 use WebDrinkAPI\Utils\OIDC;
 
 $app->group('/v2', function () use ($app) {

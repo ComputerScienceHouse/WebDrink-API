@@ -21,6 +21,9 @@ require_once 'utils/API.php';
 // Set up OIDC
 require_once 'utils/OIDC.php';
 
+// Set up Middleware
+require_once 'utils/AuthMiddleware.php';
+
 foreach (glob("models/entities/*.php") as $filename) {
     if (isset($filename)) {
         require_once @$filename;
