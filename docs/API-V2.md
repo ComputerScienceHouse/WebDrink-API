@@ -1,7 +1,7 @@
 WebDrink API v2
 ===============
 
-Attribute | Value
+Parameter | Value
 ---|---
 api_key | Your API key
 
@@ -189,5 +189,46 @@ item_id | ID of the item
     "status": true,
     "message": "Success (/items/delete)",
     "data": 93
+}
+```
+
+## Drops
+
+### GET /drops/status
+
+**Description:** Check the status of the Websocket connection to the drink server.
+
+**Parameters:** None
+
+**Sample Response:**
+
+```json
+{
+    "status": true,
+    "message": "Success! (/drops/status)",
+    "data": true
+}
+```
+
+### POST /drops/drop/{ibutton}/{machine_id}/{slot_num}/{delay}
+
+**Description:** Drop a drink by machine ID and slot number, for a user identified by iButton, using a given delay
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+ibutton | iButton number of the user dropping a drink
+machine_id | ID of the machine (i.e. 1 for Little Drink)
+slot_num | Slot number to drop a drink from
+delay | The number of seconds to delay the drop (optional, defaults to 0)
+
+**Sample Response:**
+
+```json
+{
+    "status": true,
+    "message": "Drink dropped!",
+    "data": true
 }
 ```
