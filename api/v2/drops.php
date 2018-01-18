@@ -8,6 +8,8 @@ use WebDrinkAPI\Utils\API;
  * GET /drops/status/:ibutton - Check the Websocket connection to the drink server
  */
 $app->get('/status/{ibutton}', function (Request $request, Response $response) {
+    //TODO: Check for API Key or Auth
+
     // Getting route attributes
     $ibutton = $request->getAttribute('ibutton');
 
@@ -54,6 +56,8 @@ $app->get('/status/{ibutton}', function (Request $request, Response $response) {
  * POST /drops/drop/:ibutton/:machine_id/:slot_num/:delay - Drop a drink by machine id and slot number, using the specified delay.
  */
 $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request $request, Response $response) {
+    //TODO: Check for API Key or Auth
+
     // Getting route attributes
     $ibutton = $request->getAttribute('ibutton');
     $machine_id = $request->getAttribute('machine_id');

@@ -10,6 +10,7 @@ use WebDrinkAPI\Utils\Database;
  * GET /items/list - Get a list of all drink items
  */
 $app->get('/list', function (Request $request, Response $response) {
+    //TODO: Check for API Key or Auth
     $entitymanager = Database::getEntityManager();
     $drinkItems = $entitymanager->getRepository(DrinkItems::class);
     $activeItems = $drinkItems->findBy(["state" => "active"]);
@@ -30,6 +31,7 @@ $app->get('/list', function (Request $request, Response $response) {
  */
 $app->post('/add/{name}/{price}', function (Request $request, Response $response) {
     //TODO
+    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API();
@@ -42,6 +44,7 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
  */
 $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $request, Response $response) {
     //TODO
+    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API();
@@ -55,6 +58,7 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $reque
  */
 $app->post('/delete/{item_id}', function (Request $request, Response $response) {
     //TODO
+    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API();

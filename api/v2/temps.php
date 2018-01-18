@@ -10,6 +10,8 @@ use WebDrinkAPI\Utils\Database;
  * GET /temps/machines/:machine_id/:limit/:offset - Get temperature data for a single drink machine
  */
 $app->get('/machines/{machine_id}/{limit}/{offset}', function (Request $request, Response $response) {
+    //TODO: Check for API Key or Auth
+
     $machine_id = $request->getAttribute('machine_id');
     $limit = $request->getAttribute('limit');
     $offset = $request->getAttribute('offset');
