@@ -9,12 +9,11 @@ use WebDrinkAPI\Utils\API;
  */
 $app->get('/stock/{machine_id}', function (Request $request, Response $response) {
     //TODO
-    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -22,12 +21,11 @@ $app->get('/stock/{machine_id}', function (Request $request, Response $response)
  */
 $app->get('/info/{machine_id}', function (Request $request, Response $response) {
     //TODO
-    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -35,12 +33,11 @@ $app->get('/info/{machine_id}', function (Request $request, Response $response) 
  */
 $app->post('/slot/{slot_num}/{machine_id}/{item_id}/{available}/{status}', function (Request $request, Response $response) {
     //TODO
-    //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 

@@ -17,7 +17,7 @@ $app->get('/credits/{uid}', function (Request $request, Response $response) {
     $api = new API(2);
     $ldap = new LDAP();
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -29,7 +29,7 @@ $app->post('/credits/{uid}', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -41,7 +41,7 @@ $app->get('/search/{uid}', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -53,7 +53,7 @@ $app->get('/info/{uid}/{ibutton}', function (Request $request, Response $respons
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -65,7 +65,7 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -77,7 +77,7 @@ $app->get('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -89,7 +89,7 @@ $app->post('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -101,5 +101,5 @@ $app->delete('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
 });

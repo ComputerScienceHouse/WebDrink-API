@@ -9,8 +9,6 @@ use WebDrinkAPI\Utils\API;
  * GET /drops/status/:ibutton - Check the Websocket connection to the drink server
  */
 $app->get('/status/{ibutton}', function (Request $request, Response $response) {
-    //TODO: Check for API Key or Auth
-
     // Getting route attributes
     $ibutton = $request->getAttribute('ibutton');
 
@@ -50,7 +48,7 @@ $app->get('/status/{ibutton}', function (Request $request, Response $response) {
     }
 
     $elephant->close();
-    return $response->withJson($api->result($output[0], $output[1], $output[2]));
+    return $response->withJson($api->result($output[0], $output[1], $output[2]), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -77,13 +75,13 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
         //TODO: Get the alias of a machine based on id
         $machine_alias = null;
     } else {
-        return $response->withJson($api->result(false, "Invalid 'machine_id' (/drops/drop)", false));
+        return $response->withJson($api->result(false, "Invalid 'machine_id' (/drops/drop)", false), 400, JSON_PRETTY_PRINT);
     }
 
     // Check if rate limited
     $rateLimitDelay = RATE_LIMIT_DROPS_DROP;
     if ($this->_isRateLimited("/drops/drop", $rateLimitDelay, $machine_alias)) {
-        return $response->withJson($api->result(false, "Cannon exceed one call per {$rateLimitDelay} seconds (/drops/drop)", false));
+        return $response->withJson($api->result(false, "Cannon exceed one call per {$rateLimitDelay} seconds (/drops/drop)", false), 400, JSON_PRETTY_PRINT);
     }
 
     // Connect to the Drink Server through a websocket
@@ -144,7 +142,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
     }
 
     $elephant->close();
-    return $response->withJson($api->result($output[0], $output[1], $output[2]));
+    return $response->withJson($api->result($output[0], $output[1], $output[2]), 200, JSON_PRETTY_PRINT);
 });
 
 

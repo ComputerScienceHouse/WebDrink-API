@@ -14,7 +14,7 @@ $app->get('', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "Greetings from the Drink API!", true));
+    return $response->withJson($api->result(true, "Greetings from the Drink API!", true), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -31,7 +31,7 @@ $app->get('/auth', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", $auth->requestUserInfo()));
+    return $response->withJson($api->result(true, "TODO", $auth->requestUserInfo()), 200, JSON_PRETTY_PRINT);
 });
 
 /**
@@ -50,10 +50,10 @@ $app->get('/api/{api_key}', function (Request $request, Response $response) {
     if (is_null($apiKey) or empty($apiKey)) {
         // API object constructed
         $api = new API(2);
-        return $response->withJson($api->result(false, "Try again with a valid API key", false));
+        return $response->withJson($api->result(false, "Try again with a valid API key", false), 400, JSON_PRETTY_PRINT);
     } else {
         // API object constructed with username
         $api = new API(2, $apiKey->getUid());
-        return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true));
+        return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true), 200, JSON_PRETTY_PRINT);
     }
 });

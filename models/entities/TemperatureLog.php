@@ -4,6 +4,7 @@ namespace WebDrinkAPI\Models;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * TemperatureLog
@@ -11,8 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="temperature_log")
  * @ORM\Entity
  */
-class TemperatureLog
-{
+class TemperatureLog implements JsonSerializable {
     /**
      * @var integer
      *
@@ -34,7 +34,7 @@ class TemperatureLog
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
      */
-    private $time = 'CURRENT_TIMESTAMP';
+    private $time;
 
     /**
      * @var float
@@ -49,8 +49,7 @@ class TemperatureLog
      *
      * @return integer
      */
-    public function getLogId()
-    {
+    public function getLogId() {
         return $this->logId;
     }
 
@@ -61,8 +60,7 @@ class TemperatureLog
      *
      * @return TemperatureLog
      */
-    public function setMachineId($machineId)
-    {
+    public function setMachineId($machineId) {
         $this->machineId = $machineId;
 
         return $this;
@@ -73,8 +71,7 @@ class TemperatureLog
      *
      * @return integer
      */
-    public function getMachineId()
-    {
+    public function getMachineId() {
         return $this->machineId;
     }
 
@@ -85,8 +82,7 @@ class TemperatureLog
      *
      * @return TemperatureLog
      */
-    public function setTime($time)
-    {
+    public function setTime($time) {
         $this->time = $time;
 
         return $this;
@@ -97,8 +93,7 @@ class TemperatureLog
      *
      * @return DateTime
      */
-    public function getTime()
-    {
+    public function getTime() {
         return $this->time;
     }
 
@@ -109,8 +104,7 @@ class TemperatureLog
      *
      * @return TemperatureLog
      */
-    public function setTemp($temp)
-    {
+    public function setTemp($temp) {
         $this->temp = $temp;
 
         return $this;
@@ -121,8 +115,22 @@ class TemperatureLog
      *
      * @return float
      */
-    public function getTemp()
-    {
+    public function getTemp() {
         return $this->temp;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize() {
+        return [
+            'machine_id' => $this->machineId,
+            'time'       => $this->time,
+            'temp'       => $this->temp
+        ];
     }
 }

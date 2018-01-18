@@ -87,9 +87,9 @@ $app->get('/list', function (Request $request, Response $response) {
     $api = new API(2);
 
     if (!empty($activeItems)) {
-        return $response->withJson($api->result(true, "Success (/items/list)", $activeItems));
+        return $response->withJson($api->result(true, "Success (/items/list)", $activeItems), 200, JSON_PRETTY_PRINT);
     } else {
-        return $response->withJson($api->result(true, "Failed to query database (/items/list)", false));
+        return $response->withJson($api->result(true, "Failed to query database (/items/list)", false), 400, JSON_PRETTY_PRINT);
     }
 });
 
@@ -111,9 +111,9 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
 
         if (in_array('drink', $auth->requestUserInfo('groups'))) {
             $item = addItem($item_name, $item_price, $api);
-            return $response->withJson($api->result(true, "Success (/items/add)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/add)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to add items (/items/add)", false));
+            return $response->withJson($api->result(false, "Must be an admin to add items (/items/add)", false), 403, JSON_PRETTY_PRINT);
         }
     } else if (!is_null($apiKey)) {
         // Creates an API object for creating returns
@@ -122,9 +122,9 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
         //TODO: Look up drink admin through ldap
         if (true) {
             $item = addItem($item_name, $item_price, $api);
-            return $response->withJson($api->result(true, "Success (/items/add)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/add)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to add items (/items/add)", false));
+            return $response->withJson($api->result(false, "Must be an admin to add items (/items/add)", false), 403, JSON_PRETTY_PRINT);
         }
     }
 });
@@ -149,9 +149,9 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $reque
 
         if (in_array('drink', $auth->requestUserInfo('groups'))) {
             $item = updateItem($item_id, $item_name, $item_price, $item_status, $api);
-            return $response->withJson($api->result(true, "Success (/items/update)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/update)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to update items (/items/update)", false));
+            return $response->withJson($api->result(false, "Must be an admin to update items (/items/update)", false), 403, JSON_PRETTY_PRINT);
         }
     } else if (!is_null($apiKey)) {
         // Creates an API object for creating returns
@@ -160,9 +160,9 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $reque
         //TODO: Look up drink admin through ldap
         if (true) {
             $item = updateItem($item_id, $item_name, $item_price, $item_status, $api);
-            return $response->withJson($api->result(true, "Success (/items/update)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/update)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to update items (/items/update)", false));
+            return $response->withJson($api->result(false, "Must be an admin to update items (/items/update)", false), 403, JSON_PRETTY_PRINT);
         }
     }
 });
@@ -184,9 +184,9 @@ $app->post('/delete/{item_id}', function (Request $request, Response $response) 
 
         if (in_array('drink', $auth->requestUserInfo('groups'))) {
             $item = deleteItem($item_id, $api);
-            return $response->withJson($api->result(true, "Success (/items/delete)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/delete)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to delete items (/items/delete)", false));
+            return $response->withJson($api->result(false, "Must be an admin to delete items (/items/delete)", false), 403, JSON_PRETTY_PRINT);
         }
     } else if (!is_null($apiKey)) {
         // Creates an API object for creating returns
@@ -195,9 +195,9 @@ $app->post('/delete/{item_id}', function (Request $request, Response $response) 
         //TODO: Look up drink admin through ldap
         if (true) {
             $item = deleteItem($item_id, $api);
-            return $response->withJson($api->result(true, "Success (/items/delete)", $item->getItemId()));
+            return $response->withJson($api->result(true, "Success (/items/delete)", $item->getItemId()), 200, JSON_PRETTY_PRINT);
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to delete items (/items/delete)", false));
+            return $response->withJson($api->result(false, "Must be an admin to delete items (/items/delete)", false), 403, JSON_PRETTY_PRINT);
         }
     }
 });
