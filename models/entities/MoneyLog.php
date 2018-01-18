@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MoneyLog
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
      * @ORM\Id
@@ -71,7 +72,7 @@ class MoneyLog
     /**
      * Set time
      *
-     * @param \DateTime $time
+     * @param DateTime $time
      *
      * @return MoneyLog
      */
@@ -85,7 +86,7 @@ class MoneyLog
     /**
      * Get time
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTime()
     {

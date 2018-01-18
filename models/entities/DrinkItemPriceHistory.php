@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,7 +32,7 @@ class DrinkItemPriceHistory
     private $itemPrice;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="date_set", type="datetime", nullable=false)
      * @ORM\Id
@@ -92,7 +93,7 @@ class DrinkItemPriceHistory
     /**
      * Set dateSet
      *
-     * @param \DateTime $dateSet
+     * @param DateTime $dateSet
      *
      * @return DrinkItemPriceHistory
      */
@@ -106,7 +107,7 @@ class DrinkItemPriceHistory
     /**
      * Get dateSet
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateSet()
     {

@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,7 +44,7 @@ class DropLog
     private $username;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
      */
@@ -157,7 +158,7 @@ class DropLog
     /**
      * Set time
      *
-     * @param \DateTime $time
+     * @param DateTime $time
      *
      * @return DropLog
      */
@@ -171,7 +172,7 @@ class DropLog
     /**
      * Get time
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTime()
     {

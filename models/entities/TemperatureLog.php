@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,7 @@ class TemperatureLog
     private $machineId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
      */
@@ -80,7 +81,7 @@ class TemperatureLog
     /**
      * Set time
      *
-     * @param \DateTime $time
+     * @param DateTime $time
      *
      * @return TemperatureLog
      */
@@ -94,7 +95,7 @@ class TemperatureLog
     /**
      * Get time
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTime()
     {

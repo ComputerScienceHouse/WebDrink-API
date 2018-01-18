@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,7 +37,7 @@ class DrinkItems
     private $itemPrice = '0';
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="date_added", type="datetime", nullable=false)
      */
@@ -112,7 +113,7 @@ class DrinkItems
     /**
      * Set dateAdded
      *
-     * @param \DateTime $dateAdded
+     * @param DateTime $dateAdded
      *
      * @return DrinkItems
      */
@@ -126,7 +127,7 @@ class DrinkItems
     /**
      * Get dateAdded
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateAdded()
     {
