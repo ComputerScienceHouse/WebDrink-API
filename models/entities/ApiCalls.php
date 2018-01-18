@@ -2,6 +2,7 @@
 
 namespace WebDrinkAPI\Models;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,11 +44,11 @@ class ApiCalls
     private $detail;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime", nullable=false)
      */
-    private $timestamp = 'CURRENT_TIMESTAMP';
+    private $timestamp;
 
 
     /**
@@ -135,13 +136,18 @@ class ApiCalls
     /**
      * Set timestamp
      *
-     * @param \DateTime $timestamp
+     * @param DateTime $timestamp
      *
      * @return ApiCalls
      */
-    public function setTimestamp($timestamp)
+    public function setTimestamp($timestamp = null)
     {
-        $this->timestamp = $timestamp;
+        if ($timestamp != null){
+            $this->timestamp = $timestamp;
+        } else {
+            $this->timestamp = new DateTime();
+        }
+
 
         return $this;
     }
@@ -149,7 +155,7 @@ class ApiCalls
     /**
      * Get timestamp
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTimestamp()
     {

@@ -13,7 +13,7 @@ class OIDC {
     }
 
     public function getAuth() {
-        return $this->oidc->authenticate();
+        return $this->oidc;
     }
 }
 

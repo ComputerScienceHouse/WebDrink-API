@@ -76,7 +76,8 @@ $app->get('/apikey', function (Request $request, Response $response) {
 
     // Makes route Require Auth
     $oidc = new OIDC();
-    $oidc->getAuth();
+    $auth = $oidc->getAuth();
+    $auth->authenticate();
 
     // Creates an API object for creating returns
     $api = new API();
@@ -92,7 +93,8 @@ $app->post('/apikey', function (Request $request, Response $response) {
 
     // Makes route Require Auth
     $oidc = new OIDC();
-    $oidc->getAuth();
+    $auth = $oidc->getAuth();
+    $auth->authenticate();
 
     // Creates an API object for creating returns
     $api = new API();
@@ -108,7 +110,8 @@ $app->delete('/apikey', function (Request $request, Response $response) {
 
     // Makes route Require Auth
     $oidc = new OIDC();
-    $oidc->getAuth();
+    $auth = $oidc->getAuth();
+    $auth->authenticate();
 
     // Creates an API object for creating returns
     $api = new API();

@@ -18,19 +18,20 @@ $app->get('', function (Request $request, Response $response) {
 });
 
 /**
- * GET /test/auth - Test the API with Webauth authentication (Webauth only)
+ * GET /test/auth - Test the API with Auth authentication (Auth only)
  */
 $app->get('/auth', function (Request $request, Response $response) {
     //TODO
 
     // Makes route Require Auth
     $oidc = new OIDC();
-    $oidc->getAuth();
+    $auth = $oidc->getAuth();
+    $auth->authenticate();
 
     // Creates an API object for creating returns
     $api = new API();
 
-    return $response->withJson($api->result(true, "TODO", true));
+    return $response->withJson($api->result(true, "TODO", $auth->getClientName()));
 });
 
 /**

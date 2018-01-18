@@ -26,7 +26,7 @@ $get_data = function (&$var, $default = null) {
  * */
 
 @define("OIDC_PROVIDER_URL", $get_data(getenv("OIDC_PROVIDER_URL"), 'https://sso.csh.rit.edu/auth/realms/csh'));
-@define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), ''));
+@define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), 'webdrink-api'));
 @define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
 
 /*
