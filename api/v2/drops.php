@@ -119,7 +119,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
                             $success = $success[0];
 
                             if ($success === "OK") {
-                                //TODO: Logging Drinks
+                                //TODO: Logging Drops
                                 $api->logAPICall("/drops/drop", $machine_alias);
                                 $output = [true, "Drink dropped!", true];
                                 $elephant->close();
