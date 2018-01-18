@@ -15,7 +15,7 @@ To make an API call, format your request like this:
 
 #### Test
 * [GET /test](#get-test) - Test the API 
-* [GET /test/webauth](#get-testwebauth) - Test the API with SSO/OIDC authentication (Auth only)
+* [GET /test/auth](#get-testauth) - Test the API with SSO/OIDC authentication (Auth only)
 * [GET /test/api/{api_key}](#get-testapiapi_key) - Test the API with API key authentication (API key only)
 
 #### Users
@@ -71,7 +71,7 @@ To make an API call, format your request like this:
 }
 ```
 
-### GET /test/webauth
+### GET /test/auth
 
 **Description:** Test the API using SSO/OIDC authentication (Auth only)
 
