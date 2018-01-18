@@ -21,8 +21,6 @@ $app->get('', function (Request $request, Response $response) {
  * GET /test/auth - Test the API with Auth authentication (Auth only)
  */
 $app->get('/auth', function (Request $request, Response $response) {
-    //TODO
-
     // Makes route Require Auth
     $oidc = new OIDC();
     $auth = $oidc->getAuth();

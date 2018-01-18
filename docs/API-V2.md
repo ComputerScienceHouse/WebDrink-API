@@ -9,6 +9,9 @@ To make an API call, format your request like this:
 
 `https://webdrink-api.csh.rit.edu/v2/<route>?<parameters>`
 
+### It's not the same as the old one!
+v2 of the API closely follows the existing one in WebDrink-2.0, but is not identical. Certain things have changed. **This is not an exact port of the v1 API from WebDrink-2.0!**
+Follow the documentation below to see what has changed.
 
 ----------------------------------
 
@@ -189,6 +192,41 @@ item_id | ID of the item
     "status": true,
     "message": "Success (/items/delete)",
     "data": 93
+}
+```
+
+## Temps
+
+### GET /temps/machines/{machine_id}/{limit}/{offset}
+
+**Description:** Get temperature data for a single drink machine
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+machine_id | ID of the machine
+limit | How many results to return (optional, default 300)
+offset | How many results to skip (optional, default to 0)
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/temps/machines)",
+    "data": [
+        ...
+        {  
+            "machine_id": 1,
+            "time": {
+                "date": "2018-01-18 15:30:19.000000",
+                "timezone_type": 3,
+                "timezone": "America\/New_York"
+            },
+            "temp": 76
+        },
+        ...
+    ]
 }
 ```
 
