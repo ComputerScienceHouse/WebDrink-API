@@ -74,11 +74,6 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response 
 $app->get('/apikey', function (Request $request, Response $response) {
     //TODO
 
-    // Makes route Require Auth
-    $oidc = new OIDC();
-    $auth = $oidc->getAuth();
-    $auth->authenticate();
-
     // Creates an API object for creating returns
     $api = new API();
 
@@ -91,11 +86,6 @@ $app->get('/apikey', function (Request $request, Response $response) {
 $app->post('/apikey', function (Request $request, Response $response) {
     //TODO
 
-    // Makes route Require Auth
-    $oidc = new OIDC();
-    $auth = $oidc->getAuth();
-    $auth->authenticate();
-
     // Creates an API object for creating returns
     $api = new API();
 
@@ -107,11 +97,6 @@ $app->post('/apikey', function (Request $request, Response $response) {
  */
 $app->delete('/apikey', function (Request $request, Response $response) {
     //TODO
-
-    // Makes route Require Auth
-    $oidc = new OIDC();
-    $auth = $oidc->getAuth();
-    $auth->authenticate();
 
     // Creates an API object for creating returns
     $api = new API();

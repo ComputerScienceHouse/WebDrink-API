@@ -11,8 +11,10 @@ use WebDrinkAPI\Utils\Database;
  */
 $app->get('/list', function (Request $request, Response $response) {
     //TODO: Check for API Key or Auth
-    $entitymanager = Database::getEntityManager();
-    $drinkItems = $entitymanager->getRepository(DrinkItems::class);
+    // Creates a entityManager
+    $entityManager = Database::getEntityManager();
+
+    $drinkItems = $entityManager->getRepository(DrinkItems::class);
     $activeItems = $drinkItems->findBy(["state" => "active"]);
 
     // Creates an API object for creating returns
