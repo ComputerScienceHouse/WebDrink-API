@@ -24,9 +24,9 @@ To make an API call, format your request like this:
 * [GET /users/search/{uid}](#get-userssearchuid) - Search for usernames that match the search :uid
 * [GET /users/info/{uid}/{ibutton}](#get-usersinfouidibutton) - Get a user's info (uid, username, common name, credit balance, and ibutton value)
 * [GET /users/drops/{limit}/{offset}/{uid}](#get-usersdropslimitoffsetuid) - Get the drop logs for a single or all users
-* [GET /users/apikey](#get-usersapikey) - Get your API key (Webauth Only)
-* [POST /users/apikey](#post-usersapikey) - Generate a new API key for yourself (Webauth Only)
-* [DELETE /users/apikey](#delete-usersapikey) - Delete your current API key (Webauth Only)
+* [GET /users/apikey](#get-usersapikey) - Get your API key
+* [POST /users/apikey](#post-usersapikey) - Generate a new API key for yourself
+* [DELETE /users/apikey](#delete-usersapikey) - Delete your current API key
 
 #### Machines
 * [GET /machines/stock/{machine_id}](#get-machinesstockmachine_id) - Get the stock of all or a single drink machine
