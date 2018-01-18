@@ -17,7 +17,7 @@ $app->get('/machines/{machine_id}/{limit}/{offset}', function (Request $request,
     $offset = $request->getAttribute('offset');
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     // Creates a entityManager
     $entityManager = Database::getEntityManager();

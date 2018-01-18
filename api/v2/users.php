@@ -14,7 +14,7 @@ $app->get('/credits/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
     $ldap = new LDAP();
 
     return $response->withJson($api->result(true, "TODO", true));
@@ -27,7 +27,7 @@ $app->post('/credits/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -39,7 +39,7 @@ $app->get('/search/{uid}', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -51,7 +51,7 @@ $app->get('/info/{uid}/{ibutton}', function (Request $request, Response $respons
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -63,7 +63,7 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response 
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -75,7 +75,7 @@ $app->get('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -87,7 +87,7 @@ $app->post('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -99,7 +99,7 @@ $app->delete('/apikey', function (Request $request, Response $response) {
     //TODO
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });

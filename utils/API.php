@@ -7,13 +7,16 @@ use WebDrinkAPI\Utils\Database;
 
 class API {
     private $user;
+    private $version;
 
     /**
      * API constructor.
      * @param string $user
+     * @param int $version
      */
-    public function __construct(string $user = null) {
+    public function __construct(int $version, string $user = null) {
         $this->user = $user;
+        $this->version = $version;
     }
 
 
@@ -42,7 +45,7 @@ class API {
         $new_call = new ApiCalls();
         $entityManager = Database::getEntityManager();
 
-        $new_call->setUsername($this->user)->setApiMethod($api_method)->setDetail($detail);
+        $new_call->setUsername($this->user)->setApiMethod($api_method)->setDetail($detail)->setApiVersion($this->version);
 
         $entityManager->persist($new_call);
         $entityManager->flush();

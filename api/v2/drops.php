@@ -2,6 +2,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Models\DropLog;
 use WebDrinkAPI\Utils\API;
 
 /**
@@ -14,7 +15,7 @@ $app->get('/status/{ibutton}', function (Request $request, Response $response) {
     $ibutton = $request->getAttribute('ibutton');
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     // Connect to the Drink Server through a websocket
     if (DEBUG && USE_LOCAL_DRINK_SERVER) {
@@ -65,7 +66,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
     $delay = $request->getAttribute('delay');
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     if (is_null($ibutton)) {
         //TODO: Get iButton data from ldap for user
@@ -118,6 +119,7 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
                             $success = $success[0];
 
                             if ($success === "OK") {
+                                //TODO: Logging Drinks
                                 $api->logAPICall("/drops/drop", $machine_alias);
                                 $output = [true, "Drink dropped!", true];
                                 $elephant->close();

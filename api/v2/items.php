@@ -43,7 +43,7 @@ $app->get('/list', function (Request $request, Response $response) {
     $activeItems = $drinkItems->findBy(["state" => "active"]);
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     if (!empty($activeItems)){
         return $response->withJson($api->result(true, "Success (/items/list)", $activeItems));
@@ -68,7 +68,7 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
 
     if (!is_null($auth)) {
         // Creates an API object for creating returns
-        $api = new API($auth->requestUserInfo('preferred_username'));
+        $api = new API(2, $auth->requestUserInfo('preferred_username'));
 
         if (in_array('drink', $auth->requestUserInfo('groups'))) {
             $item = addItem($item_name, $item_price, $api);
@@ -78,7 +78,7 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
         }
     } else if (!is_null($apiKey)){
         // Creates an API object for creating returns
-        $api = new API($apiKey->getUid());
+        $api = new API(2, $apiKey->getUid());
 
         //TODO: Look up drink admin through ldap
         if (true){
@@ -98,7 +98,7 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $reque
     //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -112,7 +112,7 @@ $app->post('/delete/{item_id}', function (Request $request, Response $response) 
     //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });

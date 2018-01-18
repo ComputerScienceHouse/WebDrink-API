@@ -12,7 +12,7 @@ $app->get('/stock/{machine_id}', function (Request $request, Response $response)
     //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -25,7 +25,7 @@ $app->get('/info/{machine_id}', function (Request $request, Response $response) 
     //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });
@@ -38,7 +38,7 @@ $app->post('/slot/{slot_num}/{machine_id}/{item_id}/{available}/{status}', funct
     //TODO: Check for API Key or Auth
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", true));
 });

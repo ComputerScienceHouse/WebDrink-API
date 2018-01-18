@@ -37,6 +37,13 @@ class ApiCalls
     private $apiMethod;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="api_version", type="int", length=11, nullable=false)
+     */
+    private $apiVersion;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="detail", type="string", length=255, nullable=false)
@@ -107,6 +114,28 @@ class ApiCalls
     public function getApiMethod()
     {
         return $this->apiMethod;
+    }
+
+    /**
+     * Set apiVersion
+     *
+     * @param int $apiVersion
+     *
+     * @return ApiCalls
+     */
+    public function setApiVersion(int $apiVersion) {
+        $this->apiVersion = $apiVersion;
+
+        return $this;
+    }
+
+    /**
+     * Get apiVersion
+     *
+     * @return int
+     */
+    public function getApiVersion(): int {
+        return $this->apiVersion;
     }
 
     /**

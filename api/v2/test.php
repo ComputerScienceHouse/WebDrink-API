@@ -12,7 +12,7 @@ use WebDrinkAPI\Utils\OIDC;
  */
 $app->get('', function (Request $request, Response $response) {
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "Greetings from the Drink API!", true));
 });
@@ -29,7 +29,7 @@ $app->get('/auth', function (Request $request, Response $response) {
     $auth->authenticate();
 
     // Creates an API object for creating returns
-    $api = new API();
+    $api = new API(2);
 
     return $response->withJson($api->result(true, "TODO", $auth->requestUserInfo()));
 });
@@ -49,11 +49,11 @@ $app->get('/api/{api_key}', function (Request $request, Response $response) {
 
     if (is_null($apiKey) or empty($apiKey)) {
         // API object constructed
-        $api = new API();
+        $api = new API(2);
         return $response->withJson($api->result(false, "Try again with a valid API key", false));
     } else {
         // API object constructed with username
-        $api = new API($apiKey->getUid());
+        $api = new API(2, $apiKey->getUid());
         return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true));
     }
 });

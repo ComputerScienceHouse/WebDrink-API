@@ -11,6 +11,10 @@ ALTER TABLE temperature_log ADD log_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT F
 
 ALTER TABLE drink_item_price_history ADD history_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
 
+ALTER TABLE api_calls ADD api_version INT NOT NULL;
+ALTER TABLE api_calls
+  MODIFY COLUMN api_version INT NOT NULL AFTER api_method;
+
 ```
 
 All references to `webauth` are replaced with `auth`
