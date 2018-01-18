@@ -2,18 +2,26 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Models\DrinkItems;
 use WebDrinkAPI\Utils\API;
+use WebDrinkAPI\Utils\Database;
 
 /**
  * GET /items/list - Get a list of all drink items
  */
 $app->get('/list', function (Request $request, Response $response) {
-    //TODO
+    $entitymanager = Database::getEntityManager();
+    $drinkItems = $entitymanager->getRepository(DrinkItems::class);
+    $activeItems = $drinkItems->findBy(["state" => "active"]);
 
     // Creates an API object for creating returns
     $api = new API();
 
-    return $response->withJson($api->result(true, "TODO", true));
+    if (!empty($activeItems)){
+        return $response->withJson($api->result(true, "Success (/items/list)", $activeItems));
+    } else {
+        return $response->withJson($api->result(true, "Failed to query database (/items/list)", false));
+    }
 });
 
 /**
