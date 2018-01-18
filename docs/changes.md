@@ -9,6 +9,8 @@ ALTER TABLE api_calls ADD call_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
 
 ALTER TABLE temperature_log ADD log_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
 
+ALTER TABLE drink_item_price_history ADD history_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT FIRST;
+
 ```
 
 All references to `webauth` are replaced with `auth`

@@ -11,14 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="drink_item_price_history")
  * @ORM\Entity
  */
-class DrinkItemPriceHistory
-{
+class DrinkItemPriceHistory {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="history_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $historyId;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="item_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $itemId;
 
@@ -26,8 +32,6 @@ class DrinkItemPriceHistory
      * @var string
      *
      * @ORM\Column(name="item_price", type="decimal", precision=10, scale=0, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $itemPrice;
 
@@ -35,12 +39,18 @@ class DrinkItemPriceHistory
      * @var DateTime
      *
      * @ORM\Column(name="date_set", type="datetime", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $dateSet = 'CURRENT_TIMESTAMP';
+    private $dateSet;
 
 
+    /**
+     * Get historyId
+     *
+     * @return int
+     */
+    public function getHistoryId(): int {
+        return $this->historyId;
+    }
 
     /**
      * Set itemId
@@ -49,8 +59,7 @@ class DrinkItemPriceHistory
      *
      * @return DrinkItemPriceHistory
      */
-    public function setItemId($itemId)
-    {
+    public function setItemId($itemId) {
         $this->itemId = $itemId;
 
         return $this;
@@ -61,8 +70,7 @@ class DrinkItemPriceHistory
      *
      * @return integer
      */
-    public function getItemId()
-    {
+    public function getItemId() {
         return $this->itemId;
     }
 
@@ -73,8 +81,7 @@ class DrinkItemPriceHistory
      *
      * @return DrinkItemPriceHistory
      */
-    public function setItemPrice($itemPrice)
-    {
+    public function setItemPrice($itemPrice) {
         $this->itemPrice = $itemPrice;
 
         return $this;
@@ -85,8 +92,7 @@ class DrinkItemPriceHistory
      *
      * @return string
      */
-    public function getItemPrice()
-    {
+    public function getItemPrice() {
         return $this->itemPrice;
     }
 
@@ -97,8 +103,7 @@ class DrinkItemPriceHistory
      *
      * @return DrinkItemPriceHistory
      */
-    public function setDateSet($dateSet)
-    {
+    public function setDateSet($dateSet) {
         $this->dateSet = $dateSet;
 
         return $this;
@@ -109,8 +114,7 @@ class DrinkItemPriceHistory
      *
      * @return DateTime
      */
-    public function getDateSet()
-    {
+    public function getDateSet() {
         return $this->dateSet;
     }
 }

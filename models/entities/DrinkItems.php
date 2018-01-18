@@ -42,7 +42,7 @@ class DrinkItems implements JsonSerializable
      *
      * @ORM\Column(name="date_added", type="datetime", nullable=false)
      */
-    private $dateAdded = 'CURRENT_TIMESTAMP';
+    private $dateAdded;
 
     /**
      * @var string

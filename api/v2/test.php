@@ -31,7 +31,7 @@ $app->get('/auth', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API();
 
-    return $response->withJson($api->result(true, "TODO", $auth->getClientName()));
+    return $response->withJson($api->result(true, "TODO", $auth->requestUserInfo()));
 });
 
 /**
@@ -47,16 +47,13 @@ $app->get('/api/{api_key}', function (Request $request, Response $response) {
     // Get the API key object from the DB
     $apiKey = $entityManager->getRepository(ApiKeys::class)->findOneBy(["apiKey" => $api_key]);
 
-    // API object constructed with username
-    $api = new API($apiKey->getUid());
-
     if (is_null($apiKey) or empty($apiKey)) {
+        // API object constructed
+        $api = new API();
         return $response->withJson($api->result(false, "Try again with a valid API key", false));
-    } else if (!is_null($apiKey->getUid()) and !empty($apiKey->getUid())) {
-        //TODO: Remove logging for Tests
-        $api->logAPICall("/test/api", $api_key);
-        return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true));
     } else {
-        return $response->withJson($api->result(false, "Username not found", false));
+        // API object constructed with username
+        $api = new API($apiKey->getUid());
+        return $response->withJson($api->result(true, "Greetings, " . $apiKey->getUid() . "!", true));
     }
 });
