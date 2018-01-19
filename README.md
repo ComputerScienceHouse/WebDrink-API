@@ -1,4 +1,10 @@
+<div align="center">
+
 # WebDrink API
+
+![Icon](https://user-images.githubusercontent.com/9310513/35132716-95e41ca2-fc9a-11e7-97ee-80c76dbd5c16.png)
+
+</div>
 
 Created to replace the existing API inside of WebDrink-2.0
 
