@@ -18,6 +18,9 @@ require_once __DIR__ . '/src/utils/Database.php';
 // Set up API
 require_once __DIR__ . '/src/utils/API.php';
 
+// Set up LDAP
+require_once __DIR__ . '/src/utils/LDAP.php';
+
 // Set up OIDC
 require_once __DIR__ . '/src/utils/OIDC.php';
 

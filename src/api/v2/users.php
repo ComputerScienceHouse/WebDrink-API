@@ -2,6 +2,7 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Models\ApiKeys;
 use WebDrinkAPI\Utils\API;
 use WebDrinkAPI\Utils\LDAP;
 use WebDrinkAPI\Utils\OIDC;
@@ -11,13 +12,42 @@ use WebDrinkAPI\Utils\OIDC;
  */
 $app->get('/credits/{uid}', function (Request $request, Response $response) {
     $uid = $request->getAttribute('uid');
-    //TODO
+    /** @var OpenIDConnectClient $auth */
+    $auth = $request->getAttribute('auth');
+    /** @var ApiKeys $apiKey */
+    $apiKey = $request->getAttribute('api_key');
 
-    // Creates an API object for creating returns
-    $api = new API(2);
     $ldap = new LDAP();
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    if (!is_null($auth)) {
+        $api = new API(2, $auth->requestUserInfo('preferred_username'));
+        if (in_array('drink', $auth->requestUserInfo('groups')) or $uid == $auth->requestUserInfo('preferred_username')) {
+            $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
+            if (array_key_exists(0, $data)) {
+                return $response->withJson($api->result(true, "Success (/users/credits)", (int) $data[0]["drinkbalance"][0]), 200, JSON_PRETTY_PRINT);
+            }
+            else {
+                return $response->withJson($api->result(false, "Failed to query LDAP (/users/credits)", false), 400, JSON_PRETTY_PRINT);
+            }
+        } else {
+            return $response->withJson($api->result(false, "Must be an admin to get another user's credits (/users/credits)", false), 403, JSON_PRETTY_PRINT);
+        }
+    } else if (!is_null($apiKey)){
+        $api = new API(2, $apiKey->getUid());
+
+        //TODO: Look up drink admin through ldap
+        if (true) {
+            $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
+            if (array_key_exists(0, $data)) {
+                return $response->withJson($api->result(true, "Success (/users/credits)", (int) $data[0]["drinkbalance"][0]), 200, JSON_PRETTY_PRINT);
+            }
+            else {
+                return $response->withJson($api->result(false, "Failed to query LDAP (/users/credits)", false), 400, JSON_PRETTY_PRINT);
+            }
+        } else {
+            return $response->withJson($api->result(false, "Must be an admin to get another user's credits (/users/credits)", false), 403, JSON_PRETTY_PRINT);
+        }
+    }
 });
 
 /**
