@@ -13,25 +13,25 @@ if (file_exists("config.php")) {
 }
 
 // Set up database
-require_once 'utils/Database.php';
+require_once __DIR__ . '/src/utils/Database.php';
 
 // Set up API
-require_once 'utils/API.php';
+require_once __DIR__ . '/src/utils/API.php';
 
 // Set up OIDC
-require_once 'utils/OIDC.php';
+require_once __DIR__ . '/src/utils/OIDC.php';
 
 // Set up Middleware
-require_once 'utils/AuthMiddleware.php';
+require_once __DIR__ . '/src/middleware/AuthMiddleware.php';
 
-foreach (glob("models/entities/*.php") as $filename) {
+foreach (glob(__DIR__ . "/src/models/entities/*.php") as $filename) {
     if (isset($filename)) {
         require_once @$filename;
     }
 }
 
 // Register routes
-require_once 'routes.php';
+require_once 'src/routes.php';
 
 // Run app
 $app->run();
