@@ -9,9 +9,10 @@ class LDAP {
     private $userDn;
     private $conn;
 
-    public function __construct() {
+    public function __construct(string $user) {
         // LDAP connection info
-        $ldapUser = "uid=";
+        // TODO: Get a password for LDAP
+        $ldapUser = "uid=" . $user;
         $ldapPass = "";
         $ldapHost = "ldap.csh.rit.edu";
         $userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
