@@ -59,7 +59,10 @@ class API {
      * @param LDAP $ldap
      * @return mixed
      */
-    public function isAdmin(string $uid, LDAP $ldap) {
+    public function isAdmin(string $uid, LDAP $ldap = null) {
+        if ($ldap === null){
+            $ldap = new LDAP();
+        }
         $result = $ldap->ldap_lookup_uid($uid, ['drinkAdmin']);
         if (isset($result[0]["drinkadmin"][0])) {
             return $result[0]["drinkadmin"][0];

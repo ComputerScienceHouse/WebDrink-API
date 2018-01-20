@@ -119,8 +119,7 @@ $app->post('/add/{name}/{price}', function (Request $request, Response $response
         // Creates an API object for creating returns
         $api = new API(2, $apiKey->getUid());
 
-        //TODO: Look up drink admin through ldap
-        if (true) {
+        if ($api->isAdmin($apiKey->getUid())) {
             $item = addItem($item_name, $item_price, $api);
             return $api->result($response, true, "Success (/items/add)", $item->getItemId(), 200);
         } else {
@@ -157,8 +156,7 @@ $app->post('/update/{item_id}/{name}/{price}/{status}', function (Request $reque
         // Creates an API object for creating returns
         $api = new API(2, $apiKey->getUid());
 
-        //TODO: Look up drink admin through ldap
-        if (true) {
+        if ($api->isAdmin($apiKey->getUid())) {
             $item = updateItem($item_id, $item_name, $item_price, $item_status, $api);
             return $api->result($response, true, "Success (/items/update)", $item->getItemId(), 200);
         } else {
@@ -192,8 +190,7 @@ $app->post('/delete/{item_id}', function (Request $request, Response $response) 
         // Creates an API object for creating returns
         $api = new API(2, $apiKey->getUid());
 
-        //TODO: Look up drink admin through ldap
-        if (true) {
+        if ($api->isAdmin($apiKey->getUid())) {
             $item = deleteItem($item_id, $api);
             return $api->result($response, true, "Success (/items/delete)", $item->getItemId(), 200);
         } else {
