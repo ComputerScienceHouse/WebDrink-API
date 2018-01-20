@@ -34,8 +34,6 @@ class Slots
      * @var integer
      *
      * @ORM\Column(name="item_id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $itemId;
 
@@ -43,8 +41,6 @@ class Slots
      * @var integer
      *
      * @ORM\Column(name="available", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $available = '0';
 
@@ -52,8 +48,6 @@ class Slots
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=10, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $status = 'disabled';
 

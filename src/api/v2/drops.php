@@ -2,7 +2,9 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use WebDrinkAPI\Models\MachineAliases;
 use WebDrinkAPI\Utils\API;
+use WebDrinkAPI\Utils\Database;
 
 /**
  * GET /drops/status/:ibutton - Check the Websocket connection to the drink server
@@ -69,8 +71,15 @@ $app->post('/drop/{ibutton}/{machine_id}/{slot_num}/{delay}', function (Request 
 
     // Check for machine_id and convert to machine_alias
     if (isset($machine_id)) {
-        //TODO: Get the alias of a machine based on id
-        $machine_alias = null;
+        $entityManager = Database::getEntityManager();
+        $machineAliases = $entityManager->getRepository(MachineAliases::class);
+        /** @var MachineAliases $machine_alias */
+        $machine_alias = $machineAliases->findOneBy(['machineId' => $machine_id]);
+        if (!is_null($machine_alias)){
+            $machine_alias = $machine_alias->getAlias();
+        } else {
+            return $api->result($response, false, "Invalid 'machine_id' (/drops/drop)", false, 400);
+        }
     } else {
         return $api->result($response, false, "Invalid 'machine_id' (/drops/drop)", false, 400);
     }
