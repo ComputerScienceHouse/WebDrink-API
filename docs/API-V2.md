@@ -108,6 +108,287 @@ api_key | Your API key
 }
 ```
 
+## Users
+
+### GET /users/credits/{uid}
+
+**Description:** Get a user's drink credit balance (drink admin only if :uid != your uid)
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+uid | Username of the user
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/users/credits)",
+    "data": 817
+}
+```
+
+### POST /users/credits/{uid}/{value}/{type}
+
+**Description:** Update a user's drink credit balance (drink admin only)
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+uid | Username of the user
+value | Amount of credits to add or subtract
+type | Type of transaction,"add" or "subtract"
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/users/credits)",
+    "data": 917
+}
+```
+
+### GET /users/search/{uid}
+
+**Description:** Search for usernames that match the partial :uid
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+uid | (Partial) username of the user
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/users/search)",
+    "data": [
+        {
+            "uid": "ben",
+            "cn": "Ben Litchfield"
+        },
+        {
+            "uid": "benjamin",
+            "cn": "Benjamin Meyer"
+        },
+        {
+            "uid": "benrr101",
+            "cn": "Benjamin Russell"
+        },
+        {
+            "uid": "bencentra",
+            "cn": "Ben Centra"
+        }
+    ]
+}
+```
+
+### GET /users/info/{uid}/{ibutton}
+
+**Description:** Get a user's info, including uid, username, credit balance, and ibutton. Only requests by drink admins will return ibutton. Will return your own info if no uid or ibutton is provided.
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+uid | Username of the user to look up (optional, admin only)
+ibutton | ibutton of the user to look up (optional, admin only)
+
+**Sample Response:**
+```json
+{
+    "status": true,
+    "message": "Success (/users/info)",
+    "data": {
+        "uid": "bencentra",
+        "credits": "817",
+        "admin": "1",
+        "ibutton": REDACTED,
+        "cn": "Ben Centra"
+    }
+}
+```
+
+### GET /users/drops/{limit}/{offset}/{uid}
+
+**Description:** Get a history of drink drops
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+limit | How many results to return (optional, default 100)
+offset | How many results to skip (optional, default 0)
+uid | The user to get the history for (optional, none will get drops for all users)
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/users/drops)",
+    "data": [
+        ...
+        {
+            "drop_log_id": 10479,
+            "machine_id": 1,
+            "display_name": "Little Drink",
+            "slot": "2",
+            "username": "zemon1",
+            "time": "2013-11-14 00:52:02",
+            "status": "ok",
+            "item_id": 10,
+            "item_name": "Sprite",
+            "current_item_price": 50
+        },
+        ...
+    ]
+}
+```
+
+### GET /users/apikey
+
+**Description:** Get your API key and the date it was generated (Webauth only).
+
+**Parameters:** None
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/users/apikey)",
+    "data": {
+        "uid": "bencentra",
+        "api_key": REDACTED,
+        "date": "2014-09-27 23:25:43"
+    }
+}
+```
+
+### POST /users/apikey
+
+**Description:** Generate a new API key, will overwrite your old one (Webauth only).
+
+**Parameters:** None
+
+**Sample Response:**
+```json
+{
+    "status": true,
+    "message": "Success (/users/apikey)",
+    "data": {
+        "uid": "bencentra",
+        "api_key": REDACTED,
+        "date": "2014-09-28 15:59:08"
+    }
+}
+```
+
+### DELETE /users/apikey
+
+**Description:** Delete your API key. Must be called from WebDrink (or another client behind Webauth).
+
+**Parameters:** None
+
+**Sample Response:**
+```json
+{
+    "status": true,
+    "message": "Success (/users/apikey)",
+    "data": true
+}
+```
+
+## Machines
+
+### GET /machines/stock/{machine_id}
+
+**Description:** Get the stock of one or all drink machines, sorted by machine
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+machine_id | The id of the drink machine (optional, none gets all machines)
+
+**Sample Response:**
+```json
+{
+    "status":true,
+    "message":"Success (/machines/stock)",
+    "data":{
+        "2":[
+            {
+                "slot_num": 1,
+                "machine_id": 2,
+                "display_name": "Big Drink",
+                "item_id": 74,
+                "item_name": "Drink's Choicey Choice",
+                "item_price": "50",
+                "available": 1,
+                "status": "enabled"
+            },
+            ...
+        ]
+    }
+}
+```
+
+### GET /machines/info/{machine_id}
+
+**Description:** Get the info for one or all drink machine
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+machine_id | The id of the drink machine (optional, none gets info for all machines)
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/machines/info)",
+    "data": [
+        ...
+        {
+            "machine_id": 2,
+            "name": "bigdrink",
+            "display_name": "Big Drink",
+            "alias_id": 2,
+            "alias": "d"
+        },
+        ...
+    ]
+}
+```
+
+### POST /machines/slot/{slot_num}/{machine_id}/{item_id}/{available}/{status}
+
+**Description:** Update a slot in a drink machine (drink admin only)
+
+**Parameters:** None
+
+Attribute | Value
+---|---
+slot_num | Slot number to update
+machine_id | ID of the machine the slot is in
+item_id | ID of the slot's new item (optional)
+available | Amount of the item in the slot (optional)
+status | Status of the slot, "enabled" or "disabled" (optional)
+
+**Sample Response:** 
+```json
+{
+    "status": true,
+    "message": "Success (/machines/slot)",
+    "data": true
+}
+```
+
+
 ## Items
 
 ### GET /items/list
@@ -270,3 +551,15 @@ delay | The number of seconds to delay the drop (optional, defaults to 0)
     "data": true
 }
 ```
+
+## MobileApp
+
+### GET /mobileapp/getapikey
+
+**Description:** Get (or generate) a user's API key from a WebDrink mobile app
+
+**Parameters:** None
+
+**Sample Response:**
+
+On success, redirects back to the mobile app (cshdrink://auth/api_key_here). On error, returns JSON. 

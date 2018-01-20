@@ -21,14 +21,14 @@ Created to replace the existing API inside of WebDrink-2.0
 - [Doctrine](http://www.doctrine-project.org/)
 
 
-<table style="width:100%">
+<table style="width:100%; margin:auto;">
   <tr>
     <th>v2</th>
     <th>v3</th>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/devinmatte/WebDrink-API/blob/master/docs/API-V2.md"><img src="https://img.shields.io/badge/Documentation-v2-blue.svg"></a></td>
-    <td align="center"><a href="https://github.com/devinmatte/WebDrink-API/blob/master/docs/API-V3.md"><img src="https://img.shields.io/badge/Documentation-v3-brightgreen.svg"></a></td>
+    <td align="center"><a href="https://github.com/ComputerScienceHouse/WebDrink-API/blob/master/docs/API-V2.md"><img src="https://img.shields.io/badge/Documentation-v2-blue.svg"></a></td>
+    <td align="center"><a href="https://github.com/ComputerScienceHouse/WebDrink-API/blob/master/docs/API-V3.md"><img src="https://img.shields.io/badge/Documentation-v3-brightgreen.svg"></a></td>
   </tr>
     <tr>
       <td>Maintains close compatibility for older systems</td>
