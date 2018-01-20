@@ -15,6 +15,8 @@ ALTER TABLE api_calls ADD api_version INT NOT NULL;
 ALTER TABLE api_calls
   MODIFY COLUMN api_version INT NOT NULL AFTER api_method;
 
+ALTER TABLE slots ADD PRIMARY KEY (slot_num, machine_id);
+
 ```
 
 All references to `webauth` are replaced with `auth`
