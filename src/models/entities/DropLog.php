@@ -48,7 +48,7 @@ class DropLog
      *
      * @ORM\Column(name="time", type="datetime", nullable=false)
      */
-    private $time = 'CURRENT_TIMESTAMP';
+    private $time;
 
     /**
      * @var string

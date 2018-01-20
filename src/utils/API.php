@@ -4,6 +4,7 @@ namespace WebDrinkAPI\Utils;
 
 use Slim\Http\Response;
 use WebDrinkAPI\Models\ApiCalls;
+use WebDrinkAPI\Models\DropLog;
 
 class API {
     private $user;
@@ -43,7 +44,7 @@ class API {
      * @param null $detail
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function logAPICall($api_method, $detail = null) {
+    public function logAPICall($api_method, $detail = null): void {
         $new_call = new ApiCalls();
         $entityManager = Database::getEntityManager();
 
@@ -54,13 +55,31 @@ class API {
     }
 
     /**
+     * Logs all drops from the machines
+     * @param int $machine_id
+     * @param int $slot
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function logDrop(integer $machine_id, integer $slot): void {
+        $drop_log = new DropLog();
+        $entityManager = Database::getEntityManager();
+
+        // TODO: Retrieve Slot data to get item_id, item_price, & status
+
+        $drop_log->setUsername($this->user)->setMachineId($machine_id)->setSlot($slot);
+
+        $entityManager->persist($drop_log);
+        $entityManager->flush($drop_log);
+    }
+
+    /**
      * Checks if user is drink admin
      * @param string $uid
      * @param LDAP $ldap
      * @return mixed
      */
     public function isAdmin(string $uid, LDAP $ldap = null) {
-        if ($ldap === null){
+        if ($ldap === null) {
             $ldap = new LDAP();
         }
         $result = $ldap->ldap_lookup_uid($uid, ['drinkAdmin']);
