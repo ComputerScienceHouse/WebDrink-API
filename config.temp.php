@@ -29,6 +29,15 @@ $get_data = function (&$var, $default = null) {
 @define("OIDC_CLIENT_ID", $get_data(getenv("OIDC_CLIENT_ID"), 'webdrink-api'));
 @define("OIDC_CLIENT_SECRET", $get_data(getenv("OIDC_CLIENT_SECRET"), ''));
 
+
+/*
+ * *	LDAP configuration
+ * */
+
+@define("LDAP_USER", $get_data(getenv("LDAP_USER"), 'uid=matted'));
+@define("LDAP_PASS", $get_data(getenv("LDAP_PASS"), ''));
+@define("LDAP_APP", $get_data(getenv("LDAP_APP"), false));
+
 /*
  * *	Rate limit delays (one call per X seconds)
  * */

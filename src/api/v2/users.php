@@ -17,13 +17,14 @@ $app->get('/credits/{uid}', function (Request $request, Response $response) {
     /** @var ApiKeys $apiKey */
     $apiKey = $request->getAttribute('api_key');
 
+    // Create LDAP
+    $ldap = new LDAP();
+
     if (!is_null($auth)) {
         // Extract Username
         $username = $auth->requestUserInfo('preferred_username');
         // Create API using username
         $api = new API(2, $username);
-        // Create LDAP using username
-        $ldap = new LDAP($username);
         if (in_array('drink', $auth->requestUserInfo('groups')) or $uid == $username) {
             $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
             if (array_key_exists(0, $data)) {
@@ -38,11 +39,7 @@ $app->get('/credits/{uid}', function (Request $request, Response $response) {
     } else if (!is_null($apiKey)){
         // Create API using username
         $api = new API(2, $apiKey->getUid());
-
-        // Create LDAP using username
-        $ldap = new LDAP($apiKey->getUid());
-        //TODO: Look up drink admin through ldap
-        if (true) {
+        if ($api->isAdmin($uid, $ldap) or $uid == $apiKey->getUid()) {
             $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
             if (array_key_exists(0, $data)) {
                 return $response->withJson($api->result(true, "Success (/users/credits)", (int) $data[0]["drinkbalance"][0]), 200, JSON_PRETTY_PRINT);

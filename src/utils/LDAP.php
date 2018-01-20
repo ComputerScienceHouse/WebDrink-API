@@ -9,29 +9,31 @@ class LDAP {
     private $userDn;
     private $conn;
 
-    public function __construct(string $user) {
+    public function __construct() {
         // LDAP connection info
-        // TODO: Get a password for LDAP
-        $ldapUser = "uid=" . $user;
-        $ldapPass = "";
+        $ldapUser = LDAP_USER;
+        $ldapPass = LDAP_PASS;
         $ldapHost = "ldap.csh.rit.edu";
-        $userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
+        $appDn = "ou=Apps,dc=csh,dc=rit,dc=edu";
+        $this->userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
 
         // Append the appropriate dn to the username
-        $ldapUser .= "," . $userDn;
+        if (LDAP_APP) {
+            $ldapUser .= "," . $appDn;
+        } else {
+            $ldapUser .= "," . $this->userDn;
+        }
 
         // Connect to LDAP and bind the connection
         try {
-            $conn = ldap_connect($ldapHost);
-            if (!ldap_bind($conn, $ldapUser, $ldapPass)) {
+            $this->conn = ldap_connect($ldapHost);
+            if (!ldap_bind($this->conn, $ldapUser, $ldapPass)) {
                 die ('LDAP Bind Error...');
             }
         }
         catch (Exception $e) {
             die ('LDAP Connection Failed: ' . $e->getMessage());
         }
-        $this->conn = $conn;
-        $this->userDn = $userDn;
     }
 
     function ldap_lookup($uid, $fields = null) {

@@ -50,4 +50,18 @@ class API {
         $entityManager->persist($new_call);
         $entityManager->flush();
     }
+
+    /**
+     * Checks if user is drink admin
+     * @param string $uid
+     * @param LDAP $ldap
+     * @return mixed
+     */
+    public function isAdmin(string $uid, LDAP $ldap) {
+        $result = $ldap->ldap_lookup_uid($uid, ['drinkAdmin']);
+        if (isset($result[0]["drinkadmin"][0])) {
+            return $result[0]["drinkadmin"][0];
+        }
+        return false;
+    }
 }
