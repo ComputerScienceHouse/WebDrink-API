@@ -2,8 +2,8 @@
 
 namespace WebDrinkAPI\Utils;
 
+use Slim\Http\Response;
 use WebDrinkAPI\Models\ApiCalls;
-use WebDrinkAPI\Utils\Database;
 
 class API {
     private $user;
@@ -22,17 +22,19 @@ class API {
 
     /**
      * Format the result of an API call
+     * @param Response $response
      * @param $status bool
      * @param $message string
      * @param $data
-     * @return array
+     * @param int $code
+     * @return Response
      */
-    public function result(bool $status, string $message, $data) {
-        return [
+    public function result(Response $response, bool $status, string $message, $data, int $code) {
+        return $response->withJson([
             "status"  => $status,
             "message" => $message,
             "data"    => $data
-        ];
+        ], $code, JSON_PRETTY_PRINT);
     }
 
     /**

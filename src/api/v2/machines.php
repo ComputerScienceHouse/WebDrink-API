@@ -13,7 +13,7 @@ $app->get('/stock/{machine_id}', function (Request $request, Response $response)
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -25,7 +25,7 @@ $app->get('/info/{machine_id}', function (Request $request, Response $response) 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -37,7 +37,7 @@ $app->post('/slot/{slot_num}/{machine_id}/{item_id}/{available}/{status}', funct
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 

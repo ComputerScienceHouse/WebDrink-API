@@ -5,7 +5,6 @@ use Slim\Http\Response;
 use WebDrinkAPI\Models\ApiKeys;
 use WebDrinkAPI\Utils\API;
 use WebDrinkAPI\Utils\LDAP;
-use WebDrinkAPI\Utils\OIDC;
 
 /**
  * GET /users/credits/:uid - Get a user's drink credit balance (drink admin only if :uid != your uid)
@@ -28,27 +27,25 @@ $app->get('/credits/{uid}', function (Request $request, Response $response) {
         if (in_array('drink', $auth->requestUserInfo('groups')) or $uid == $username) {
             $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
             if (array_key_exists(0, $data)) {
-                return $response->withJson($api->result(true, "Success (/users/credits)", (int) $data[0]["drinkbalance"][0]), 200, JSON_PRETTY_PRINT);
-            }
-            else {
-                return $response->withJson($api->result(false, "Failed to query LDAP (/users/credits)", false), 400, JSON_PRETTY_PRINT);
+                return $api->result($response, true, "Success (/users/credits)", (int)$data[0]["drinkbalance"][0], 200);
+            } else {
+                return $api->result($response, false, "Failed to query LDAP (/users/credits)", false, 400);
             }
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to get another user's credits (/users/credits)", false), 403, JSON_PRETTY_PRINT);
+            return $api->result($response, false, "Must be an admin to get another user's credits (/users/credits)", false, 403);
         }
-    } else if (!is_null($apiKey)){
+    } else if (!is_null($apiKey)) {
         // Create API using username
         $api = new API(2, $apiKey->getUid());
         if ($api->isAdmin($uid, $ldap) or $uid == $apiKey->getUid()) {
             $data = $ldap->ldap_lookup_uid($uid, ['drinkBalance']);
             if (array_key_exists(0, $data)) {
-                return $response->withJson($api->result(true, "Success (/users/credits)", (int) $data[0]["drinkbalance"][0]), 200, JSON_PRETTY_PRINT);
-            }
-            else {
-                return $response->withJson($api->result(false, "Failed to query LDAP (/users/credits)", false), 400, JSON_PRETTY_PRINT);
+                return $api->result($response, true, "Success (/users/credits)", (int)$data[0]["drinkbalance"][0], 200);
+            } else {
+                return $api->result($response, false, "Failed to query LDAP (/users/credits)", false, 400);
             }
         } else {
-            return $response->withJson($api->result(false, "Must be an admin to get another user's credits (/users/credits)", false), 403, JSON_PRETTY_PRINT);
+            return $api->result($response, false, "Must be an admin to get another user's credits (/users/credits)", false, 403);
         }
     }
 });
@@ -62,7 +59,7 @@ $app->post('/credits/{uid}', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -74,7 +71,7 @@ $app->get('/search/{uid}', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -86,7 +83,7 @@ $app->get('/info/{uid}/{ibutton}', function (Request $request, Response $respons
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -98,7 +95,7 @@ $app->get('/drops/{limit}/{offset}/{uid}', function (Request $request, Response 
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -110,7 +107,7 @@ $app->get('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -122,7 +119,7 @@ $app->post('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });
 
 /**
@@ -134,5 +131,5 @@ $app->delete('/apikey', function (Request $request, Response $response) {
     // Creates an API object for creating returns
     $api = new API(2);
 
-    return $response->withJson($api->result(true, "TODO", true), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "TODO", true, 200);
 });

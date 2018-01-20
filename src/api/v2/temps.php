@@ -23,5 +23,5 @@ $app->get('/machines/{machine_id}/{limit}/{offset}', function (Request $request,
     // Gets all logs from DB
     $temps = $entityManager->getRepository(TemperatureLog::class)->findBy(["machineId" => $machine_id], ["time" => "DESC"], $limit, $offset);
 
-    return $response->withJson($api->result(true, "Success (/temps/machines)", $temps), 200, JSON_PRETTY_PRINT);
+    return $api->result($response, true, "Success (/temps/machines)", $temps, 200);
 });
