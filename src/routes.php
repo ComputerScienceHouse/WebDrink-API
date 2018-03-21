@@ -24,11 +24,12 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->group('/v2', function () use ($app) {
-    $auth = new AuthMiddleware();
 
     $app->group('/test', function () use ($app) {
         require __DIR__ . '/api/v2/test.php';
     });
+
+    $auth = new AuthMiddleware();
 
     $app->group('/users', function () use ($app) {
         require __DIR__ . '/api/v2/users.php';

@@ -37,4 +37,10 @@ foreach (glob(__DIR__ . "/src/models/entities/*.php") as $filename) {
 require_once __DIR__ . '/src/routes.php';
 
 // Run app
-$app->run();
+try {
+    $app->run();
+} catch (\Slim\Exception\MethodNotAllowedException $e) {
+    echo $e;
+} catch (\Slim\Exception\NotFoundException $e) {
+    echo $e;
+}
