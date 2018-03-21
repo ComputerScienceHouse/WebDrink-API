@@ -36,7 +36,8 @@ $get_data = function (&$var, $default = null) {
 
 @define("LDAP_USER", $get_data(getenv("LDAP_USER"), 'uid=matted'));
 @define("LDAP_PASS", $get_data(getenv("LDAP_PASS"), ''));
-@define("LDAP_APP", $get_data(getenv("LDAP_APP"), false));
+@define("LDAP_APP", filter_var($get_data(getenv("LDAP_APP"), false), FILTER_VALIDATE_BOOLEAN));
+@define("LDAP_HOST", $get_data(getenv("LDAP_HOST"), 'ldap.csh.rit.edu'));
 
 /*
  * *	Rate limit delays (one call per X seconds)
@@ -48,7 +49,7 @@ $get_data = function (&$var, $default = null) {
  * *	Development configuration
  * */
 
-@define("DEBUG", $get_data(getenv("DEBUG"), true)); // true for test mode, false for production
+@define("DEBUG", filter_var($get_data(getenv("DEBUG"), true), FILTER_VALIDATE_BOOLEAN)); // true for test mode, false for production
 
 @define("DEBUG_USER_UID", $get_data(getenv("DEBUG_USER_UID"), 'matted')); // If DEBUG is `true`, the UID of the test user (probably your own)
 @define("DEBUG_USER_CN", $get_data(getenv("DEBUG_USER_CN"), 'Devin Matte')); // If DEBUG is `true`, the display name of the user (probably your own)

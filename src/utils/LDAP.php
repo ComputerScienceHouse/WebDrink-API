@@ -13,7 +13,7 @@ class LDAP {
         // LDAP connection info
         $ldapUser = LDAP_USER;
         $ldapPass = LDAP_PASS;
-        $ldapHost = "ldap.csh.rit.edu";
+        $ldapHost = LDAP_HOST;
         $appDn = "ou=Apps,dc=csh,dc=rit,dc=edu";
         $this->userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
 
