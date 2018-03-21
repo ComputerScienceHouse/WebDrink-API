@@ -19,6 +19,11 @@ use Slim\Http\Response;
 use WebDrinkAPI\Middleware\AuthMiddleware;
 use WebDrinkAPI\Utils\OIDC;
 
+$app->get('/', function (Request $request, Response $response) {
+    # TODO: Create fancy display page that shows to documentation
+    return $response->withJson("Welcome to the Webdrink API!");
+});
+
 $app->group('/v2', function () use ($app) {
     $auth = new AuthMiddleware();
 
