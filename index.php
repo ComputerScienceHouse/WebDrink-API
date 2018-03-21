@@ -34,7 +34,7 @@ foreach (glob(__DIR__ . "/src/models/entities/*.php") as $filename) {
 }
 
 // Register routes
-require_once 'src/routes.php';
+require_once __DIR__ . '/src/routes.php';
 
 // Run app
 $app->run();

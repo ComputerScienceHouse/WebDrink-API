@@ -28,27 +28,27 @@ $app->group('/v2', function () use ($app) {
     $auth = new AuthMiddleware();
 
     $app->group('/test', function () use ($app) {
-        include 'api/v2/test.php';
+        include __DIR__ . '/api/v2/test.php';
     });
 
     $app->group('/users', function () use ($app) {
-        include 'api/v2/users.php';
+        include __DIR__ . '/api/v2/users.php';
     })->add($auth);
 
     $app->group('/machines', function () use ($app) {
-        include 'api/v2/machines.php';
+        include __DIR__ . '/api/v2/machines.php';
     })->add($auth);
 
     $app->group('/items', function () use ($app) {
-        include 'api/v2/items.php';
+        include __DIR__ . '/api/v2/items.php';
     })->add($auth);
 
     $app->group('/temps', function () use ($app) {
-        include 'api/v2/temps.php';
+        include __DIR__ . '/api/v2/temps.php';
     })->add($auth);
 
     $app->group('/drops', function () use ($app) {
-        include 'api/v2/drops.php';
+        include __DIR__ . '/api/v2/drops.php';
     })->add($auth);
 });
 
