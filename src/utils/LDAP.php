@@ -6,7 +6,8 @@ namespace WebDrinkAPI\Utils;
 use Exception;
 
 class LDAP {
-    private $userDn;
+    private $userDn = "cn=users,cn=accounts,dc=csh,dc=rit,dc=edu";
+    private $appDn = "cn=services,cn=accounts,dc=csh,dc=rit,dc=edu";
     private $conn;
 
     public function __construct() {
@@ -14,12 +15,10 @@ class LDAP {
         $ldapUser = LDAP_USER;
         $ldapPass = LDAP_PASS;
         $ldapHost = LDAP_HOST;
-        $appDn = "ou=Apps,dc=csh,dc=rit,dc=edu";
-        $this->userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
 
         // Append the appropriate dn to the username
         if (LDAP_APP) {
-            $ldapUser .= "," . $appDn;
+            $ldapUser .= "," . $this->appDn;
         } else {
             $ldapUser .= "," . $this->userDn;
         }
